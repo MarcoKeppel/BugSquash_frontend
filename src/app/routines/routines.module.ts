@@ -8,6 +8,8 @@ import { RoutinesPageRoutingModule } from './routines-routing.module';
 
 import { RoutinesPage } from './routines.page';
 import { DomSelectorComponent } from './dom-selector/dom-selector.component';
+import { ActionsListComponent } from './actions-list/actions-list.component';
+import { ActionComponent } from './actions-list/action/action.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,8 @@ import { DomSelectorComponent } from './dom-selector/dom-selector.component';
   declarations: [
     RoutinesPage,
     DomSelectorComponent,
+    ActionsListComponent,
+    ActionComponent,
   ]
 })
 export class RoutinesPageModule {}

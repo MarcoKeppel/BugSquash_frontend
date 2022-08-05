@@ -8,15 +8,6 @@
 
   <app-dom-selector (itemClick)="onItemClick($event)"></app-dom-selector>
 
-  
-  <ion-list>
-    <ion-item *ngFor="let e of this.elements">
-      <ion-label>
-        <h2>Tag: {{ e.tagName }}</h2>
-        <h3>ID: {{ e.id }}</h3>
-        <h3>Type: {{ e.type }}</h3>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <app-actions-list></app-actions-list>
   
 </ion-content>
