@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Routines</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-dom-selector (itemClick)="onItemClick($event)"></app-dom-selector>
+
+  
+  <ion-list>
+    <ion-item *ngFor="let e of this.elements">
+      <ion-label>
+        <h2>Tag: {{ e.tagName }}</h2>
+        <h3>ID: {{ e.id }}</h3>
+        <h3>Type: {{ e.type }}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
