@@ -24,3 +24,9 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-modal.fullscreen {
+    --width: 90%;
+    --height: 90%;
+    /*--border-radius: 0;*/
+  }

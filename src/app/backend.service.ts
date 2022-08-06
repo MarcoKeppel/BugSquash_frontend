@@ -7,6 +7,11 @@ import { environment } from 'src/environments/environment';
 })
 export class BackendService {
 
+  websiteUrl: string;
+  routines = [];
+  routinesResult = [];
+  
+
   constructor(private httpClient: HttpClient) { }
 
   addTest(target: string, name: string, result: string, interactions) {
@@ -19,14 +24,23 @@ export class BackendService {
 
     console.log(params.getAll);
 
+    this.routines.push({
+      target: target,
+      name: name,
+      result: result,
+      interactions: interactions,
+      results: null
+    });
+
     return this.httpClient.get<any>(environment.BACKEND_URL + "/addTest", { params: params });
   }
 
   runTest(target) {
 
     let params = new HttpParams()
-      .set("target", "TestHack8");
+      .set("target",  target);
 
     return this.httpClient.get<any>(environment.BACKEND_URL + "/runTest", { params: params })
   }
+
 }

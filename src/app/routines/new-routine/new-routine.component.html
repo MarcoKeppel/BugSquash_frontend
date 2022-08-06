@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Routine</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSaveRoutineClick()">
+        <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+        <ion-label>Save routine</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-input type="text" placeholder="Test name" [(ngModel)]="testName"></ion-input>
+  </ion-item>
+
+  <app-dom-selector (itemClick)="onItemClick($event)" (resultChanged)="onResultChanged($event)"></app-dom-selector>
+
+  <app-actions-list></app-actions-list>
+
+</ion-content>

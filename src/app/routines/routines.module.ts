@@ -10,6 +10,7 @@ import { RoutinesPage } from './routines.page';
 import { DomSelectorComponent } from './dom-selector/dom-selector.component';
 import { ActionsListComponent } from './actions-list/actions-list.component';
 import { ActionComponent } from './actions-list/action/action.component';
+import { NewRoutineComponent } from './new-routine/new-routine.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { ActionComponent } from './actions-list/action/action.component';
   ],
   declarations: [
     RoutinesPage,
+    NewRoutineComponent,
     DomSelectorComponent,
     ActionsListComponent,
     ActionComponent,

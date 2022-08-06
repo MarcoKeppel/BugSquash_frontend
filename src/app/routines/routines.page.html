@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Routines</ion-title>
+    <ion-title>Test routines</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onSaveRoutineClick()">
-        <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-        <ion-label>Save routine</ion-label>
+      <ion-button (click)="onNewRoutineClick()">
+        <ion-icon slot="end" name="add-outline"></ion-icon>
+        <ion-label>New test routine</ion-label>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -12,8 +12,30 @@
 
 <ion-content>
 
-  <app-dom-selector (itemClick)="onItemClick($event)" style="display: block; width: 100%; height: 65%;"></app-dom-selector>
+  <ion-button (click)="onRunAll()" *ngIf="backendService.routines.length > 0" color="success" expand="full" fill="outline" class="ion-margin">Run all</ion-button>
 
-  <app-actions-list></app-actions-list>
+  <ion-card *ngFor="let r of backendService.routines">
+    <ion-card-header>
+      <ion-card-title>{{ r.name }}</ion-card-title>
+      <ion-card-subtitle>Target: {{ r.target }}</ion-card-subtitle>
+      <ion-card-subtitle>Expected result: {{ r.result }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-header *ngIf="r.results !== null">
+      <div [ngStyle]="{'background-color': r.results.result ? 'var(--ion-color-success)' : 'var(--ion-color-warning)' }">Result: {{ r.results.result }}</div>
+      Vitals:<br>
+      <div class="ion-margin-horizontal">
+        cls: {{ r.results.vitals.cls }}<br>
+        fid: {{ r.results.vitals.fid }}<br>
+        lcp: {{ r.results.vitals.lcp }}<br>
+        ttfb: {{ r.results.vitals.ttfb }}
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="onRunTest(r.name)" color="success">
+        <ion-icon slot="end" name="color-wand-outline"></ion-icon>
+        <ion-label>Run test</ion-label>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

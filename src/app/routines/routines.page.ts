@@ -1,47 +1,51 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { BackendService } from '../backend.service';
 import { ActionsListService } from './actions-list/actions-list.service';
+import { NewRoutineComponent } from './new-routine/new-routine.component';
 
 @Component({
   selector: 'app-routines',
   templateUrl: './routines.page.html',
   styleUrls: ['./routines.page.scss'],
-  providers: [ActionsListService],
 })
 export class RoutinesPage implements OnInit {
 
   constructor(
-    private actionsListService: ActionsListService,
-    private backendService: BackendService,) { }
+    private modalController: ModalController,
+    public backendService: BackendService,
+  ) { }
 
   ngOnInit() {
   }
 
-  onItemClick(e) {
-    console.dir(e);
-    this.actionsListService.addAction(e);
+  async onNewRoutineClick() {
+
+    const modal = await this.modalController.create({
+      component: NewRoutineComponent,
+      cssClass: "fullscreen"
+    });
+    modal.present();
   }
 
-  onSaveRoutineClick() {
+  onRunAll() {
 
-    let interactions = [];
-
-    for (let i of this.actionsListService.actionsList) {
-      
-      interactions.push({
-        id: i.id,
-        interaction_type: i.type.toLowerCase() === "submit" ? "click" : "fill",
-        content: "TODO"
-      });
+    for (let r of this.backendService.routines) {
+      this.onRunTest(r.name);
     }
+  }
 
-    console.log(interactions);
+  onRunTest(name: string) {
 
-    let name = "" + Date.now();
-
-    this.backendService.addTest("hackathon.bz.it/secure/login", name, "hackathon.bz.it/secure/user", interactions).subscribe();
-
-    this.backendService.runTest(name).subscribe();
+    for (let r of this.backendService.routines) {
+      if (r.name === name) {
+        this.backendService.runTest(name).subscribe((res) => {
+          console.log(res);
+          r.results = res;
+        });
+        return;
+      }
+    }
   }
 
 }

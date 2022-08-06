@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BackendService } from 'src/app/backend.service';
 
 @Component({
   selector: 'app-dom-selector',
@@ -8,20 +10,36 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Vie
 export class DomSelectorComponent implements OnInit, AfterViewInit {
 
   @Output() itemClick = new EventEmitter<any>();
+  @Output() resultChanged = new EventEmitter<any>();
 
   @ViewChild('selection_iframe') selection_iframe: ElementRef<HTMLIFrameElement>;
 
-  constructor() { }
+  safeUrl;
 
-  ngOnInit() {}
+  lastUrl: string;
+
+  constructor(
+    public backendService: BackendService,
+    private domSanitizer: DomSanitizer,
+  ) { }
+
+  ngOnInit() {
+    this.safeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.backendService.websiteUrl);
+  }
 
   ngAfterViewInit() {
+
+    
 
     this.selection_iframe.nativeElement.onload = () => {
 
       console.log("iframe loaded");
 
       let f = this.selection_iframe.nativeElement;
+
+      this.lastUrl = f.contentWindow.location.href;
+      console.log("last url: " + this.lastUrl);
+      this.resultChanged.emit(this.lastUrl);
 
       let inputs = [];
       inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("input"));
