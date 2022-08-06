@@ -26,7 +26,7 @@
     <ion-card-header *ngIf="r.results !== null">
       <span style="display: block; font-weight: bold;" [ngStyle]="{'color': r.results.result ? 'var(--ion-color-success)' : 'var(--ion-color-danger)' }">Result: {{ r.results.result }}</span>
       Vitals:<br>
-      <div class="ion-margin-horizontal">
+      <div class="ion-margin-horizontal" *ngIf="r.results.hasOwnProperty('vitals')">
         cls: {{ r.results.vitals.cls }}<br>
         fid: {{ r.results.vitals.fid }}<br>
         lcp: {{ r.results.vitals.lcp }}<br>
