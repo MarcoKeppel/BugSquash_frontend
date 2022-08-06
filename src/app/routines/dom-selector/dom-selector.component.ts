@@ -41,40 +41,41 @@ export class DomSelectorComponent implements OnInit, AfterViewInit {
       console.log("last url: " + this.lastUrl);
       this.resultChanged.emit(this.lastUrl);
 
-      let inputs = [];
-      inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("input"));
-      inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("button"));
       console.log(f.contentWindow.document.querySelectorAll("input, button, a"));
-      console.log(inputs);
-      // for (let i of Array.from(inputs)) {
-      //   i.onclick = (e) => {
-      //     let el = e.target as HTMLElement;
-      //     console.log(el);
-      //     console.dir(el.id);
-      //     el.style.border = "2px solid red";
 
-      //     this.itemClick.emit(el);
-      //     // return false;
-      //   }
-      // }
       for (let i of Array.from(f.contentWindow.document.querySelectorAll("input, button, a"))) {
         (i as HTMLElement).onclick = (e) => {
           let el = e.target as HTMLElement;
           console.log(el);
           console.dir(el.id);
-          let a = el;
-          let els = [];
-          while (a) {
-              els.unshift(a);
-              a = a.parentElement;
-          }
-          console.log(els)
+          // let a = el;
+          // let els = [];
+          // while (a) {
+          //     els.unshift(a);
+          //     a = a.parentElement;
+          // }
+          // console.log(els)
           el.style.border = "2px solid red";
 
           this.itemClick.emit(el);
           return true;
         }
       }
+    }
+  }
+
+  autoDetectInputs() {
+
+    let f = this.selection_iframe.nativeElement;
+
+    for (let i of Array.from(f.contentWindow.document.querySelector("form").querySelectorAll("input:not([type='hidden'])"))) {
+
+      let el = i as HTMLElement;
+
+      console.log(el);
+
+      el.style.border = "2px solid red";
+      this.itemClick.emit(el);
     }
   }
 

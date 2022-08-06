@@ -1,5 +1,7 @@
 <ion-card>
 
+  <ion-card-content>
+
     Tag: {{ action.tagName }}<br>
     ID: {{ action.id }}<br>
     Type: {{ action.type }}<br>
@@ -7,5 +9,7 @@
     <ion-item *ngIf="action.tagName.toLowerCase() === 'input' && action.type.toLowerCase() !== 'submit'">
       <ion-input type="text" placeholder="Text..."></ion-input>
     </ion-item>
+
+  </ion-card-content>
 
 </ion-card>

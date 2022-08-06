@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Test routines</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onNewRoutineClick()">
@@ -21,7 +21,7 @@
       <ion-card-subtitle>Expected result: {{ r.result }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-header *ngIf="r.results !== null">
-      <div [ngStyle]="{'background-color': r.results.result ? 'var(--ion-color-success)' : 'var(--ion-color-warning)' }">Result: {{ r.results.result }}</div>
+      <span style="display: block;" [ngStyle]="{'background-color': r.results.result ? 'var(--ion-color-success)' : 'var(--ion-color-warning)' }">Result: {{ r.results.result }}</span>
       Vitals:<br>
       <div class="ion-margin-horizontal">
         cls: {{ r.results.vitals.cls }}<br>

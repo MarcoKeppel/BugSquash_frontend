@@ -1,3 +1,7 @@
-<iframe [src]="safeUrl" style="display: inline-block; width: 50%; height: 100%;" height="800px" #selection_iframe></iframe>
+<ion-button (click)="autoDetectInputs()" fill="outline" expand="full" style="display: block">
+    <ion-icon slot="end" name="sparkles-outline"></ion-icon>
+    <ion-label>Auto detect inputs</ion-label>
+</ion-button>
+<iframe [src]="safeUrl" style="display: inline-block; width: 78%; height: 80%;" height="800px" #selection_iframe></iframe>
 
 <!-- src="../../../assets/html/website.html" -->
