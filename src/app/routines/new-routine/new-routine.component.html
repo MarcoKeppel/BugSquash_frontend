@@ -10,14 +10,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
   <ion-item>
     <ion-input type="text" placeholder="Test name" [(ngModel)]="testName"></ion-input>
   </ion-item>
 
-  <app-dom-selector (itemClick)="onItemClick($event)" (resultChanged)="onResultChanged($event)"></app-dom-selector>
+  <div style="display: flex; height: 85%;">
 
-  <app-actions-list></app-actions-list>
+    <app-dom-selector (itemClick)="onItemClick($event)" (resultChanged)="onResultChanged($event)" style="flex: 1;"></app-dom-selector>
+
+    <app-actions-list style="width: 300px;"></app-actions-list>
+  
+  </div>
 
 </ion-content>

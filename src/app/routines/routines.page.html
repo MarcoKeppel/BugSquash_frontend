@@ -12,7 +12,10 @@
 
 <ion-content>
 
-  <ion-button (click)="onRunAll()" *ngIf="backendService.routines.length > 0" color="success" expand="full" fill="outline" class="ion-margin">Run all</ion-button>
+  <ion-button (click)="onRunAll()" *ngIf="backendService.routines.length > 0" color="success" expand="full" fill="outline" class="ion-margin">
+    <ion-icon slot="end" name="construct-outline"></ion-icon>
+    <ion-label>Run all</ion-label>
+  </ion-button>
 
   <ion-card *ngFor="let r of backendService.routines">
     <ion-card-header>
@@ -21,7 +24,7 @@
       <ion-card-subtitle>Expected result: {{ r.result }}</ion-card-subtitle>
     </ion-card-header>
     <ion-card-header *ngIf="r.results !== null">
-      <span style="display: block;" [ngStyle]="{'background-color': r.results.result ? 'var(--ion-color-success)' : 'var(--ion-color-warning)' }">Result: {{ r.results.result }}</span>
+      <span style="display: block; font-weight: bold;" [ngStyle]="{'color': r.results.result ? 'var(--ion-color-success)' : 'var(--ion-color-danger)' }">Result: {{ r.results.result }}</span>
       Vitals:<br>
       <div class="ion-margin-horizontal">
         cls: {{ r.results.vitals.cls }}<br>
