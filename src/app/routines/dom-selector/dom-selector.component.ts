@@ -23,9 +23,24 @@ export class DomSelectorComponent implements OnInit, AfterViewInit {
 
       let f = this.selection_iframe.nativeElement;
 
-      let inputs = f.contentWindow.document.getElementsByTagName("input");console.log(inputs);
-      for (let i of Array.from(inputs)) {
-        i.onclick = (e) => {
+      let inputs = [];
+      inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("input"));
+      inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("button"));
+      console.log(f.contentWindow.document.querySelectorAll("input, button"));
+      console.log(inputs);
+      // for (let i of Array.from(inputs)) {
+      //   i.onclick = (e) => {
+      //     let el = e.target as HTMLElement;
+      //     console.log(el);
+      //     console.dir(el.id);
+      //     el.style.border = "2px solid red";
+
+      //     this.itemClick.emit(el);
+      //     // return false;
+      //   }
+      // }
+      for (let i of Array.from(f.contentWindow.document.querySelectorAll("input, button"))) {
+        (i as HTMLElement).onclick = (e) => {
           let el = e.target as HTMLElement;
           console.log(el);
           console.dir(el.id);

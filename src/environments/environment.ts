@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  BACKEND_URL: "localhost:8000"
+  BACKEND_URL: "http://192.168.137.75:8000"
 };
 
 /*

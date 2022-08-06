@@ -37,7 +37,11 @@ export class RoutinesPage implements OnInit {
 
     console.log(interactions);
 
-    this.backendService.addTest("hackathon.bz.it/secure/login", interactions).subscribe();
+    let name = "" + Date.now();
+
+    this.backendService.addTest("hackathon.bz.it/secure/login", name, "hackathon.bz.it/secure/user", interactions).subscribe();
+
+    this.backendService.runTest(name).subscribe();
   }
 
 }
