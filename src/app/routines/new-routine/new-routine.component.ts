@@ -42,16 +42,14 @@ export class NewRoutineComponent implements OnInit {
       
       interactions.push({
         id: i.id,
-        interaction_type: i.type.toLowerCase() === "submit" ? "click" : "fill",
+        interaction_type: i.hasOwnProperty("type") ? (i.type.toLowerCase() === "submit" ? "click" : "fill") : "click",
         content: "TODO"
       });
     }
 
     console.log(interactions);
 
-    // if (this.testName == null || this.testName == "") this.testName =  "" + Date.now();
-
-    this.backendService.addTest(this.backendService.websiteUrl, this.testName, this.expectedResult, interactions).subscribe();
+    this.backendService.addTest(this.backendService.websiteUrl, this.testName || "" + Date.now(), this.expectedResult, interactions).subscribe();
 
     //this.backendService.runTest(name).subscribe();
 

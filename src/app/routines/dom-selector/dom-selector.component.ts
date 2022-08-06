@@ -44,7 +44,7 @@ export class DomSelectorComponent implements OnInit, AfterViewInit {
       let inputs = [];
       inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("input"));
       inputs = inputs.concat(f.contentWindow.document.getElementsByTagName("button"));
-      console.log(f.contentWindow.document.querySelectorAll("input, button"));
+      console.log(f.contentWindow.document.querySelectorAll("input, button, a"));
       console.log(inputs);
       // for (let i of Array.from(inputs)) {
       //   i.onclick = (e) => {
@@ -57,15 +57,22 @@ export class DomSelectorComponent implements OnInit, AfterViewInit {
       //     // return false;
       //   }
       // }
-      for (let i of Array.from(f.contentWindow.document.querySelectorAll("input, button"))) {
+      for (let i of Array.from(f.contentWindow.document.querySelectorAll("input, button, a"))) {
         (i as HTMLElement).onclick = (e) => {
           let el = e.target as HTMLElement;
           console.log(el);
           console.dir(el.id);
+          let a = el;
+          let els = [];
+          while (a) {
+              els.unshift(a);
+              a = a.parentElement;
+          }
+          console.log(els)
           el.style.border = "2px solid red";
 
           this.itemClick.emit(el);
-          // return false;
+          return true;
         }
       }
     }
