@@ -19,8 +19,8 @@ export class ActionsListComponent implements OnInit {
     
     this.subscription = actionsListService.actionAdded.subscribe(
       action => {
-        if (this.actionsList.indexOf(action) === -1) {
-          this.actionsList = this.actionsList.concat(action);
+        if (this.actionsListService.actionsList.indexOf(action) === -1) {
+          this.actionsListService.actionsList.push(action);
           this.cdr.detectChanges();
         }
     });

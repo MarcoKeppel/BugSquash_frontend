@@ -7,6 +7,8 @@ export class ActionsListService {
   actionAdded = new Subject<any>();
   actionRemoved = new Subject<any>();
 
+  actionsList = [];
+
   addAction(action) {
     this.actionAdded.next(action);
   }

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BackendService } from '../backend.service';
 import { ActionsListService } from './actions-list/actions-list.service';
 
 @Component({
@@ -9,19 +10,34 @@ import { ActionsListService } from './actions-list/actions-list.service';
 })
 export class RoutinesPage implements OnInit {
 
-  elements: HTMLElement[] = [ ];
-
-  constructor(private actionsListService: ActionsListService) { }
+  constructor(
+    private actionsListService: ActionsListService,
+    private backendService: BackendService,) { }
 
   ngOnInit() {
   }
 
   onItemClick(e) {
     console.dir(e);
-    if (this.elements.indexOf(e) === -1) {
-      //this.elements = this.elements.concat(e);
-      this.actionsListService.addAction(e);
+    this.actionsListService.addAction(e);
+  }
+
+  onSaveRoutineClick() {
+
+    let interactions = [];
+
+    for (let i of this.actionsListService.actionsList) {
+      
+      interactions.push({
+        id: i.id,
+        interaction_type: i.type.toLowerCase() === "submit" ? "click" : "fill",
+        content: "TODO"
+      });
     }
+
+    console.log(interactions);
+
+    this.backendService.addTest("hackathon.bz.it/secure/login", interactions).subscribe();
   }
 
 }

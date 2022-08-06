@@ -32,6 +32,7 @@ export class DomSelectorComponent implements OnInit, AfterViewInit {
           el.style.border = "2px solid red";
 
           this.itemClick.emit(el);
+          // return false;
         }
       }
     }
