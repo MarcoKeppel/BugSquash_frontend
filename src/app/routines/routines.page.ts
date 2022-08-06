@@ -58,7 +58,7 @@ export class RoutinesPage implements OnInit {
     if (success) {
       const toast = await this.toastController.create({
         message: 'Test ' + target + ' was successful.',
-        duration: 2000,
+        duration: 3000,
         color: "success"
       });
       toast.present();
@@ -66,7 +66,7 @@ export class RoutinesPage implements OnInit {
     else {
       const toast = await this.toastController.create({
         message: 'Test ' + target + ' was not successful.',
-        duration: 2000,
+        duration: 3000,
         color: "danger"
       });
       toast.present();
